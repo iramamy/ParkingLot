@@ -86,5 +86,3 @@ cap.release()
 out.release()
 cv2.destroyAllWindows()
 
-# Convert video into mp4
-ffmpeg.input(output).output('./Data/output.mp4').run()
