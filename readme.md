@@ -5,7 +5,7 @@ This project involves performing real-time image classification of parking spots
 
 ![ParkingArea](./Data/output.png)
 
-Output video can be found [here]()
+Output video can be found [here](https://github.com/iramamy/ParkingLot/tree/main/Data)
 
 ## Data 
 Video source: [https://www.pexels.com/](https://www.pexels.com/)
