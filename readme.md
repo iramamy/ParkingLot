@@ -3,7 +3,9 @@ This project involves performing real-time image classification of parking spots
 
 ## Preview
 
-![ParkingArea](./Data/output.gif)
+![ParkingArea](./Data/output.png)
+
+Output video can be found [here]()
 
 ## Data 
 Video source: [https://www.pexels.com/](https://www.pexels.com/)
