@@ -1,9 +1,11 @@
 import cv2
 from helper import get_bboxes, is_empty, img_diff
+import ffmpeg
 import numpy as np
 
 mask_path = './Data/mask.png'
 video_path = './Data/data.mp4'
+output = './Data/output.avi'
 
 # Read mask
 mask = cv2.imread(mask_path, 0)
@@ -11,6 +13,13 @@ width, height = mask.shape
 
 # Read video
 cap = cv2.VideoCapture(video_path)
+width, height, fps = (int(cap.get(x)) for x in (cv2.CAP_PROP_FRAME_WIDTH,
+                                       cv2.CAP_PROP_FRAME_HEIGHT,
+                                       cv2.CAP_PROP_FPS)
+            )
+
+fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Codec
+out = cv2.VideoWriter(output, fourcc, fps, (width, height))
 
 connected_components = cv2.connectedComponentsWithStats(mask, 4, cv2.CV_32S)
 spots = get_bboxes(connected_components)
@@ -66,10 +75,16 @@ while True:
         2)
 
     cv2.imshow('frame', frame)
+    out.write(frame)
+
     if cv2.waitKey(SPEED) & 0xFF == ord('q'):
         break
 
     FRAME_NUMBER += 1
 
-cap.realese()
+cap.release()
+out.release()
 cv2.destroyAllWindows()
+
+# Convert video into mp4
+ffmpeg.input(output).output('./Data/output.mp4').run()
